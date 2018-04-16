@@ -1,10 +1,6 @@
 FROM centos:7.4.1708
 
-RUN yum update -y
-RUN yum install epel-release -y
-RUN yum update -y
-RUN yum install -y openvpn wget git
-WORKDIR /tmp
-RUN git clone https://github.com/OpenVPN/easy-rsa
-RUN mv easy-rsa /etc/openvpn
+ADD install_openvpn.sh /root/scripts/install_openvpn.sh
+RUN /root/scripts/install_openvpn.sh
 ADD server.conf /etc/openvpn/server.conf
+
